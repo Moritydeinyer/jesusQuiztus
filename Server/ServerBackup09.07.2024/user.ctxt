@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=user
+comment1.params=tempID\ x\ y\ speed\ health\ damage\ points\ email\ password\ visibility\ img\ effects
+comment1.target=user(int,\ float,\ float,\ int,\ int,\ int,\ int,\ java.lang.String,\ java.lang.String,\ boolean,\ java.lang.String,\ int[])
+comment2.params=tempUsers
+comment2.target=user[]\ sortUsers(user[])
+comment3.params=
+comment3.target=void\ update()
+comment4.params=
+comment4.target=void\ act()
+comment5.params=o
+comment5.target=int\ compareTo(user)
+numComments=6

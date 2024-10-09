@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=multiple_choice
+comment1.params=tempGame\ tempDatabase\ tempUser\ tempMainMenu\ tempCreator
+comment1.target=multiple_choice(game,\ databaseConnect,\ user,\ main_menu,\ boolean)
+comment2.params=
+comment2.target=void\ prepare()
+comment3.params=
+comment3.target=void\ act()
+numComments=4

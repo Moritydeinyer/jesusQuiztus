@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=button
+comment1.params=image
+comment1.target=button(java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=boolean\ clicked()
+comment4.params=img
+comment4.target=void\ setBackgroundImage(java.lang.String)
+numComments=5

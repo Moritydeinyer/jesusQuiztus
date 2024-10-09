@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=game
+comment1.params=tempID\ tempTime\ tempJoinNr\ tempUsers\ tempCurrentMap\ tempRound\ tempPhase\ sErver_id\ tempPublic
+comment1.target=game(int,\ int,\ int,\ user[],\ int,\ int,\ int,\ int,\ boolean)
+comment2.params=
+comment2.target=void\ update()
+numComments=3

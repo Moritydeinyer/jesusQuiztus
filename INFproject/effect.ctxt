@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=effect
+comment1.params=id\ lasting_time\ intensity\ function\ description\ activated
+comment1.target=effect(int,\ int,\ int,\ int,\ java.lang.String,\ int)
+comment2.params=
+comment2.target=void\ update()
+numComments=3

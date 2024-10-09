@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=create
+comment1.params=tempMainMenu\ tempDatabase\ tempGame\ tempUser
+comment1.target=create(main_menu,\ databaseConnect,\ game,\ user)
+comment2.params=joinNr
+comment2.target=void\ prepare(int)
+comment3.params=
+comment3.target=void\ musicStop()
+comment4.params=
+comment4.target=void\ act()
+numComments=5

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=map
+comment1.params=tempID\ mapdesigns
+comment1.target=map(int,\ mapdesign[])
+comment2.params=
+comment2.target=void\ update()
+numComments=3
