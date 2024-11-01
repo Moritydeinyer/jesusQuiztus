@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=game_over
 comment1.params=tempMainMenu\ tempDatabase\ tempUser\ tempGame\ c
-comment1.target=game_over(main_menu,\ databaseConnect,\ user,\ game,\ boolean)
+comment1.target=game_over(main_menu,\ databaseGateway,\ user,\ game,\ boolean)
 comment2.params=
 comment2.target=void\ prepare()
 comment3.params=

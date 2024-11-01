@@ -9,7 +9,7 @@ public class main_menu extends Screen
     button button4;
     button button5;
     
-    databaseConnect database;
+    databaseGateway database;
     
     join join;
     create create;
@@ -20,7 +20,7 @@ public class main_menu extends Screen
     public main_menu() {
         super(720, 1280, 1);
         setBackground("main_menu.png");
-        database = new databaseConnect();
+        database = new databaseGateway();
         prepare();
     }
     
@@ -43,8 +43,8 @@ public class main_menu extends Screen
         try {
             if (user == null) {
                 String email = Greenfoot.ask("Please enter your username");
-                effect FX = new effect(34, -10, 1, -10, "", 0); // init effect
-                database.effectSerializerDB(FX, 2);                
+                effect FX = new effect(34, -10, 1, -10, "x", 0); // init effect
+                database.effectSerializerDB(FX, 3);                
                 effect[] effects = { FX }; //DEV get by predefined IDs
                 user = new user(1, 0, 0, 5, 10, 1, 0, email, "1234", true, "juengerRechts.png", effects);
                 database.userSerializerDB(user, 3);
@@ -114,7 +114,7 @@ public class main_menu extends Screen
                     }
                 }
             }
-        } catch (SQLException e) {System.out.println(e);}
+        } catch (Exception e) {System.out.println(e);}
     }
     
     public void delete_game(main_game tempGame) {
@@ -131,6 +131,6 @@ public class main_menu extends Screen
                 database.gameSerializerDB(game, 1);
             }
             game = null;
-        } catch (SQLException e) {System.out.println(e);}
+        } catch (Exception e) {System.out.println(e);}
     }
 }

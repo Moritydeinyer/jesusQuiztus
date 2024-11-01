@@ -19,7 +19,7 @@ public class multiple_choice extends Screen
     int fail_connect;
     boolean creator;
     
-    databaseConnect database;
+    databaseGateway database;
     
     button mc1;
     button mc2;
@@ -35,7 +35,7 @@ public class multiple_choice extends Screen
     
     int answer;
     
-    public multiple_choice(game tempGame, databaseConnect tempDatabase, user tempUser, main_menu tempMainMenu, boolean tempCreator)
+    public multiple_choice(game tempGame, databaseGateway tempDatabase, user tempUser, main_menu tempMainMenu, boolean tempCreator)
     {
         super(720, 1280, 1);
         setBackground("main_game.png");
@@ -71,7 +71,7 @@ public class multiple_choice extends Screen
             question = new label(Question.data, 35);
             question.setTextColor(Color.WHITE);
             addObject(question,562,165);
-        } catch (SQLException e) {}
+        } catch (Exception e) {}
         mc1 = new button("multiple_choice.png");
         addObject(mc1, 268, 425);
         mc1.getImage().setTransparency(100);
@@ -99,7 +99,7 @@ public class multiple_choice extends Screen
                 game.time = timer.timer;
                 database.gameSerializerDB(game, 2);
             }
-        } catch (SQLException e) {fail_connect++;}
+        } catch (Exception e) {fail_connect++;}
         if (mc1.clicked()) {
             answer = 1;
             mc1.getImage().setTransparency(150);

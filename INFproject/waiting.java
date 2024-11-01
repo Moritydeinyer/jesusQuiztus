@@ -8,7 +8,7 @@ public class waiting extends Screen
     label label1;
     label[] users;
     
-    databaseConnect database;
+    databaseGateway database;
     
     game game;
     
@@ -20,7 +20,7 @@ public class waiting extends Screen
     
     main_menu main_menu;
     
-    public waiting(main_menu tempMainMenu, databaseConnect tempDatabase, game tempGame, user tempUser) {
+    public waiting(main_menu tempMainMenu, databaseGateway tempDatabase, game tempGame, user tempUser) {
         super(720, 1280, 1);
         setBackground("wait.png");
         database = tempDatabase;
@@ -70,7 +70,7 @@ public class waiting extends Screen
             game = database.gameSerializerJava(game.join_nr);
             fail_connect = 0;
             Greenfoot.delay(10);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println(e);
             fail_connect++;
         }
@@ -104,7 +104,7 @@ public class waiting extends Screen
                     }
                 }
             }
-        } catch (SQLException e) {fail_connect++;}
+        } catch (Exception e) {fail_connect++;}
         Greenfoot.setSpeed(game.fps);
     }
 }

@@ -16,7 +16,7 @@ public class user extends Actor implements Comparable<user>
     effect[] effects;
     boolean visibility;
     boolean active;
-    databaseConnect database;
+    databaseGateway database;
     String img;
     
     public user(int tempID, float x, float y, int speed, int health, int damage, int points, String email, String password, boolean visibility, String img, effect[] effects)

@@ -16,11 +16,11 @@ public class signin extends Screen
     String password;
     String email;
     
-    databaseConnect database;
+    databaseGateway database;
     
     main_menu main_menu;
     
-    public signin(main_menu tempMainMenu, databaseConnect tempDatabase) {
+    public signin(main_menu tempMainMenu, databaseGateway tempDatabase) {
         super(720, 1280, 1);
         setBackground("signin_menu.png");
         database = tempDatabase;
@@ -70,7 +70,7 @@ public class signin extends Screen
                     label2.setText("");
                     label1.setText("invalid password");
                 }
-            } catch (SQLException e) { //create new user
+            } catch (Exception e) { //create new user
             
             } 
         }

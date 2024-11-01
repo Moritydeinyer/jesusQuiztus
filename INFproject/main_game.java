@@ -24,7 +24,7 @@ public class main_game extends Screen
    boolean resetHealth;
    int rightQuestions;
    
-   databaseConnect database;
+   databaseGateway database;
    
    button ovlButton;
 
@@ -88,7 +88,7 @@ public class main_game extends Screen
    boolean qa = false;
    int gameTime;
        
-   public main_game(main_menu tempMainMenu, databaseConnect tempDatabase, game tempGame, user tempUser) {
+   public main_game(main_menu tempMainMenu, databaseGateway tempDatabase, game tempGame, user tempUser) {
         super(720, 1280, 1);
         setBackground("main_game.png");
         database = tempDatabase;
@@ -105,7 +105,7 @@ public class main_game extends Screen
    {        
         try {
             game = database.gameSerializerJava(game.join_nr);
-        } catch (SQLException e) {fail_connect++;}
+        } catch (Exception e) {fail_connect++;}
         tempUsers = new user[game.users.length - 1];
         int i = 0;
         for (user usr : game.users) {
@@ -130,7 +130,7 @@ public class main_game extends Screen
             game.time = 1;
             try {
                 database.gameSerializerDB(game, 2);
-            } catch (SQLException e) {fail_connect++;}
+            } catch (Exception e) {fail_connect++;}
             timer.timerStart();
         }
         ping = new label("", 20);
@@ -254,7 +254,7 @@ public class main_game extends Screen
    }
    
    public void act() {
-       ping.setText("Ping "+database.ping);
+       //ping.setText("Ping "+database.ping);
        if (button1.clicked()) {
            Greenfoot.setWorld(main_menu);
            main_menu.delete_game(this);
@@ -445,14 +445,14 @@ public class main_game extends Screen
                user.yy = user.getY();
                user.xx = user.getX();
                database.userSerializerDB(user, 2);   
-           } catch (SQLException e) {
+           } catch (Exception e) {
                System.out.println(e);
                fail_connect++; 
            }
            if (creator) {
                try {
                    game = database.gameSerializerJava(game.join_nr);
-               } catch (SQLException e) {fail_connect++;}
+               } catch (Exception e) {fail_connect++;}
                time.setText(timer.formatSeconds(timer.timer));
                game.time = timer.timer;
                boolean gO = false;
@@ -467,7 +467,7 @@ public class main_game extends Screen
                }
                try {
                    database.gameSerializerDB(game, 2);
-               } catch (SQLException e) {fail_connect++;}
+               } catch (Exception e) {fail_connect++;}
            } else {
                time.setText(timer.formatSeconds(game.time));
            }                                                                                
@@ -529,7 +529,7 @@ public class main_game extends Screen
         }
        try {
            game = database.gameSerializerJava(game.join_nr);
-        } catch (SQLException e) {fail_connect++;}
+        } catch (Exception e) {fail_connect++;}
         
        if (fail_connect >= 5) {
                fail_connect = 0;
@@ -573,7 +573,7 @@ public class main_game extends Screen
                        user.xx = (float) 0;
                        user.yy = (float) 0;
                        database.userSerializerDB(user, 2);
-                    } catch (SQLException e) {}
+                    } catch (Exception e) {}
                    wh2 = true; 
                    acPhase = game.phase;
                }
@@ -664,11 +664,11 @@ public class main_game extends Screen
                    game.phase = 1;
                    try {
                        database.gameSerializerDB(game, 2);
-                   } catch (SQLException e) {fail_connect++;}
+                   } catch (Exception e) {fail_connect++;}
                }
                try {
                    game = database.gameSerializerJava(game.join_nr);
-               } catch (SQLException e) {fail_connect++;}
+               } catch (Exception e) {fail_connect++;}
                int minutes = game.time / 60;
                int remainingSeconds = game.time % 60;
                time.setText(String.format("%02d:%02d", minutes, remainingSeconds)); 
@@ -682,7 +682,7 @@ public class main_game extends Screen
                        mctxt2.setText(Question.answer_b);
                        mctxt3.setText(Question.answer_c);
                        mctxt4.setText(Question.answer_d);
-                   } catch (SQLException e) {fail_connect++;}
+                   } catch (Exception e) {fail_connect++;}
                }
                if (game.time <5) {sync=true;}
                if (game.time >= 6) {
@@ -751,7 +751,7 @@ public class main_game extends Screen
                                }
                                System.out.println(rightQuestions);
                                database.userSerializerDB(u, 2);
-                            } catch (SQLException e) {fail_connect++;}
+                            } catch (Exception e) {fail_connect++;}
                         }
                    }
                    try {
@@ -759,7 +759,7 @@ public class main_game extends Screen
                        double factor = (double) rightQuestions / (double) 3.00;
                        user.points = (int) ((double) user.points * (double) factor);
                        database.userSerializerDB(user, 2);
-                    } catch (SQLException e) {}
+                    } catch (Exception e) {}
                    game_over gameOverScreen = new game_over(main_menu, database , user, game, creator);
                    Greenfoot.setWorld(gameOverScreen); 
                } else {
@@ -797,7 +797,7 @@ public class main_game extends Screen
                        user.xx = (float) 0;
                        user.yy = (float) 0;
                        database.userSerializerDB(user, 2);
-                    } catch (SQLException e) {fail_connect++;}
+                    } catch (Exception e) {fail_connect++;}
                    wh2 = true; 
                    rightQuestions = 0;
                }
@@ -814,11 +814,11 @@ public class main_game extends Screen
                game.phase = 2;
                try {
                    database.gameSerializerDB(game, 2);
-               } catch (SQLException e) {fail_connect++;}
+               } catch (Exception e) {fail_connect++;}
            } 
            try {
                    game = database.gameSerializerJava(game.join_nr);
-           } catch (SQLException e) {fail_connect++;}
+           } catch (Exception e) {fail_connect++;}
            int minutes = game.time / 60;
            int remainingSeconds = game.time % 60;
            time.setText(String.format("%02d:%02d", minutes, remainingSeconds)); 
@@ -831,7 +831,7 @@ public class main_game extends Screen
                     q2.getImage().setTransparency(100);
                     q3.getImage().setTransparency(100);
                     q4.getImage().setTransparency(100);
-                } catch (SQLException e) {fail_connect++;}
+                } catch (Exception e) {fail_connect++;}
             }
            if (q2.clicked()) { 
                 try {
@@ -842,7 +842,7 @@ public class main_game extends Screen
                     q2.getImage().setTransparency(150);
                     q3.getImage().setTransparency(100);
                     q4.getImage().setTransparency(100);
-                } catch (SQLException e) {fail_connect++;}
+                } catch (Exception e) {fail_connect++;}
             }
            if (q3.clicked()) { 
                 try {
@@ -853,7 +853,7 @@ public class main_game extends Screen
                     q2.getImage().setTransparency(100);
                     q3.getImage().setTransparency(150);
                     q4.getImage().setTransparency(100);
-                } catch (SQLException e) {fail_connect++;}
+                } catch (Exception e) {fail_connect++;}
             }
            if (q4.clicked()) { 
                 try {
@@ -864,7 +864,7 @@ public class main_game extends Screen
                     q2.getImage().setTransparency(100);
                     q3.getImage().setTransparency(100);
                     q4.getImage().setTransparency(150);
-                } catch (SQLException e) {fail_connect++;}
+                } catch (Exception e) {fail_connect++;}
             }
            if (game.time <= 2) {chooseSpawn = true;}
            if (game.time >= 5 && chooseSpawn) {
@@ -878,7 +878,7 @@ public class main_game extends Screen
                            game.phase = 0;
                            database.gameSerializerDB(game, 2);
                        }
-                    } catch (SQLException e) {fail_connect++;}
+                    } catch (Exception e) {fail_connect++;}
                 }
                user.setLocation((int) user.xx, (int) user.yy);
                for (mapdesign md : tempMapDesign) {
@@ -913,7 +913,7 @@ public class main_game extends Screen
                    userPoints[i].setText(""+uu.points);
                }
            }
-       } catch (SQLException e) {fail_connect++;}
+       } catch (Exception e) {fail_connect++;}
        
        Greenfoot.setSpeed(game.fps);
    }

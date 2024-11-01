@@ -5,7 +5,7 @@ public class game_over extends Screen
 {
     button button1;
     
-    databaseConnect database;
+    databaseGateway database;
     
     time timer;
     
@@ -28,7 +28,7 @@ public class game_over extends Screen
     
     user user;
     
-    public game_over(main_menu tempMainMenu, databaseConnect tempDatabase, user tempUser, game tempGame, boolean c) {
+    public game_over(main_menu tempMainMenu, databaseGateway tempDatabase, user tempUser, game tempGame, boolean c) {
         super(720, 1280, 1);
         setBackground("gameover.png");
         database = tempDatabase;
@@ -38,7 +38,7 @@ public class game_over extends Screen
         creator = c;
         try {
             game = database.gameSerializerJava(game.join_nr);
-        } catch (SQLException e) {}
+        } catch (Exception e) {}
         prepare();
     }
     
@@ -103,7 +103,7 @@ public class game_over extends Screen
         try {
            game = database.gameSerializerJava(game.join_nr);
            fail_connect = 0;
-        } catch (SQLException e) {
+        } catch (Exception e) {
            System.out.println(e);
            fail_connect++; 
         }

@@ -10,7 +10,7 @@ public class join extends Screen
     label label;
     label label2;
     
-    databaseConnect database;
+    databaseGateway database;
     
     game game;
     
@@ -19,7 +19,7 @@ public class join extends Screen
     main_menu main_menu;
     waiting waiting;
     
-    public join(main_menu tempMainMenu, databaseConnect tempDatabase, user tempUser) {
+    public join(main_menu tempMainMenu, databaseGateway tempDatabase, user tempUser) {
         super(720, 1280, 1);
         main_menu = tempMainMenu;
         setBackground("join_screen.png");
@@ -77,7 +77,7 @@ public class join extends Screen
                 } else {
                     label2.setText("game already started");
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 label2.setText("invalid join number");
             }
         }

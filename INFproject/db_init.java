@@ -3,14 +3,14 @@ import greenfoot.*;
 
 public class db_init extends Screen
 {
-    databaseConnect database;
+    databaseGateway database;
     
     public db_init()
     {
         super(720, 1280, 1);
         setBackground("main_game.png"); //DEV
         prepare();
-        database = new databaseConnect();
+        database = new databaseGateway();
     }
    
     private void prepare()

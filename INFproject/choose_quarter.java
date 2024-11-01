@@ -15,7 +15,7 @@ public class choose_quarter extends Screen
     
     time timer; 
     
-    databaseConnect database;
+    databaseGateway database;
     
     main_menu main_menu;
     
@@ -28,7 +28,7 @@ public class choose_quarter extends Screen
     int fail_connect;
     boolean creator;
     
-    public choose_quarter(main_menu tempMainMenu, databaseConnect tempDatabase, game tempGame, user tempUser)
+    public choose_quarter(main_menu tempMainMenu, databaseGateway tempDatabase, game tempGame, user tempUser)
     {
         super(720, 1280, 1);
         setBackground("main_game.png");
@@ -94,7 +94,7 @@ public class choose_quarter extends Screen
                     }
                 }
             }
-        } catch (SQLException e) {} 
+        } catch (Exception e) {} 
         if (creator) {
             timer.timerStart();
         }
@@ -108,7 +108,7 @@ public class choose_quarter extends Screen
                 game.time = timer.timer;
                 database.gameSerializerDB(game, 2);
             }
-        } catch (SQLException e) {fail_connect++;}
+        } catch (Exception e) {fail_connect++;}
         if (q1.clicked()) {
             try {
                 user.xx = (float) 960;
@@ -118,7 +118,7 @@ public class choose_quarter extends Screen
                 q2.getImage().setTransparency(100);
                 q3.getImage().setTransparency(100);
                 q4.getImage().setTransparency(100);
-            } catch (SQLException e) {}
+            } catch (Exception e) {}
         }
         if (q2.clicked()) { 
             try {
@@ -129,7 +129,7 @@ public class choose_quarter extends Screen
                 q2.getImage().setTransparency(150);
                 q3.getImage().setTransparency(100);
                 q4.getImage().setTransparency(100);
-            } catch (SQLException e) {}
+            } catch (Exception e) {}
         }
         if (q3.clicked()) { 
             try {
@@ -140,7 +140,7 @@ public class choose_quarter extends Screen
                 q2.getImage().setTransparency(100);
                 q3.getImage().setTransparency(150);
                 q4.getImage().setTransparency(100);
-            } catch (SQLException e) {}
+            } catch (Exception e) {}
         }
         if (q4.clicked()) { 
             try {
@@ -151,7 +151,7 @@ public class choose_quarter extends Screen
                 q2.getImage().setTransparency(100);
                 q3.getImage().setTransparency(100);
                 q4.getImage().setTransparency(150);
-            } catch (SQLException e) {}
+            } catch (Exception e) {}
         }
         if (button1.clicked()) {
             main_menu.delete_game_db(game);

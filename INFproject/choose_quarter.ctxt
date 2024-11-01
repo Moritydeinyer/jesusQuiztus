@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=choose_quarter
 comment1.params=tempMainMenu\ tempDatabase\ tempGame\ tempUser
-comment1.target=choose_quarter(main_menu,\ databaseConnect,\ game,\ user)
+comment1.target=choose_quarter(main_menu,\ databaseGateway,\ game,\ user)
 comment2.params=
 comment2.target=void\ prepare()
 comment3.params=

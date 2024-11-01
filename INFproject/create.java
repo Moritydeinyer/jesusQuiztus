@@ -9,7 +9,7 @@ public class create extends Screen
     game game;
     label[] users;
     
-    databaseConnect database;
+    databaseGateway database;
     
     main_menu main_menu;
     
@@ -17,7 +17,7 @@ public class create extends Screen
     
     GreenfootSound waitingMusic;
     
-    public create(main_menu tempMainMenu, databaseConnect tempDatabase, game tempGame, user tempUser) {
+    public create(main_menu tempMainMenu, databaseGateway tempDatabase, game tempGame, user tempUser) {
         super(720, 1280, 1);
         setBackground("start.png");
         database = tempDatabase;
@@ -28,7 +28,7 @@ public class create extends Screen
         prepare(game.join_nr);
         try {
             database.gameSerializerDB(game, 3);
-        } catch (SQLException e) {}
+        } catch (Exception e) {}
     }
     
     private void prepare(int joinNr)
@@ -79,7 +79,7 @@ public class create extends Screen
                 game.time = 1;
                 game.creator = true;
                 database.gameSerializerDB(game, 2);
-            } catch (SQLException e) {System.out.println(e);}
+            } catch (Exception e) {System.out.println(e);}
             musicStop();
             Greenfoot.setWorld(new choose_quarter(main_menu, database, game, user));
             }
@@ -107,7 +107,7 @@ public class create extends Screen
                     }
                 }
             }
-        } catch (SQLException e) {} 
+        } catch (Exception e) {} 
         Greenfoot.setSpeed(game.fps);
     }
 }
