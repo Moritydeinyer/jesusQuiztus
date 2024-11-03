@@ -14,7 +14,7 @@ public class game extends Actor
     int server_id;
     boolean pblc;
     
-    int fps = 80;
+    int fps = 50;
     
     public game(int tempID, int tempTime, int tempJoinNr, user[] tempUsers, map tempCurrentMap, int tempRound, int tempPhase, int sErver_id, boolean tempPublic)
     {

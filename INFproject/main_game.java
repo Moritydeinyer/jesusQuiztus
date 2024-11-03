@@ -254,7 +254,8 @@ public class main_game extends Screen
    }
    
    public void act() {
-       //ping.setText("Ping "+database.ping);
+       long ssT = System.currentTimeMillis();
+       ping.setText("Ping "+database.ping);
        if (button1.clicked()) {
            Greenfoot.setWorld(main_menu);
            main_menu.delete_game(this);
@@ -316,7 +317,7 @@ public class main_game extends Screen
                                     database.effectSerializerDB(e, 2);
                                 } 
                             }
-                            
+                            boolean ussrUpdate = false;
                             if (resetHealth) {
                                 if (usr.health <= 0) {
                                     ussr.points = ussr.points + gameTime / 4 * (game.users.length);
@@ -326,8 +327,9 @@ public class main_game extends Screen
                                     ussr.points = ussr.points + ussr.health*(game.users.length)*30/tempX;
                                 }
                                 ussr.health = 10;
-                                database.userSerializerDB(ussr, 2);
-                                ussr = database.userSerializerJava(ussr.id, "", "");
+                                ussrUpdate = true;
+                                //database.userSerializerDB(ussr, 2);                   DEBUG 11/24
+                                //ussr = database.userSerializerJava(ussr.id, "", "");  DEBUG 11/24
                             }
                             if (usr.visibility == true) {usr.getImage().setTransparency(255);} else {usr.getImage().setTransparency(0);} //DEV TEST
                             if (user.isTouchingActor(usr)) {
@@ -339,12 +341,12 @@ public class main_game extends Screen
                                        //DAMAGE player
                                        lastClick = System.currentTimeMillis();
                                        ussr.health = ussr.health - user.damage;
-                                       database.userSerializerDB(ussr, 2);
+                                       //database.userSerializerDB(ussr, 2);             DEBUG 11/24
                                        System.out.println(System.currentTimeMillis() + "" + lastClick);
                                        //create blood
                                        mapdesign blood = new mapdesign(1, usr.getY(), usr.getX(), 5, "blood.png", "5");
                                        database.mapdesignSerializerDB(blood, 3);
-                                       
+                                       ussrUpdate = true;
                                        
                                        mapdesign[] tempMD = new mapdesign[tempMapDesign.length+1];
                                        int i = 0;
@@ -363,6 +365,9 @@ public class main_game extends Screen
                                        sound.play();
                                     } 
                                 }
+                            }
+                            if (ussrUpdate) {
+                                database.userSerializerDB(ussr, 2);         //DEBUG 11/24
                             }
                         }
                     }
@@ -402,19 +407,22 @@ public class main_game extends Screen
                
                effectDesc.setText("");
                for (effect e : user.effects) {
+                   boolean effectUpdate = false;
                    if ((System.currentTimeMillis()/1000) >= e.activated+1 && e.lasting_time > 0 && e.activated > 0) {
                         System.out.println("d4");
                         e.activated = (int) (System.currentTimeMillis()/1000); //seconds
                         e.lasting_time--;
                         System.out.println("d6");
-                        database.effectSerializerDB(e, 2);
+                        //database.effectSerializerDB(e, 2);            DEBUG 11/24
+                        effectUpdate = true;
                    } 
                    if (e.id >=5 && e.function != -10) {
                        effectLast.setText(timer.formatSeconds(e.lasting_time));
                        effectDesc.setText(e.description+"");
                        if (Greenfoot.isKeyDown("e") && e.activated == 0) {
                            e.activated = 1;
-                           database.effectSerializerDB(e, 2);
+                           //database.effectSerializerDB(e, 2);         DEBUG 11/24
+                           effectUpdate = true;
                        }
                        if (e.activated > 0 && e.lasting_time > 0) {
                            //apply effect
@@ -434,6 +442,9 @@ public class main_game extends Screen
                        }
                        break;
                    } 
+                   if (effectUpdate) {
+                       database.effectSerializerDB(e, 2);           //DEBUG 11/24 
+                   }
                }
                
                     
@@ -526,11 +537,11 @@ public class main_game extends Screen
                    timer.timerStart();
                }
            }
-        }
-       try {
-           game = database.gameSerializerJava(game.join_nr);
-        } catch (Exception e) {fail_connect++;}
-        
+        } else {
+               try {
+                   game = database.gameSerializerJava(game.join_nr);
+                } catch (Exception e) {fail_connect++;}
+        } 
        if (fail_connect >= 5) {
                fail_connect = 0;
                Greenfoot.setWorld(main_menu);
@@ -666,9 +677,9 @@ public class main_game extends Screen
                        database.gameSerializerDB(game, 2);
                    } catch (Exception e) {fail_connect++;}
                }
-               try {
-                   game = database.gameSerializerJava(game.join_nr);
-               } catch (Exception e) {fail_connect++;}
+               //try {                                                      DEBUG 11/24
+               //    game = database.gameSerializerJava(game.join_nr);
+               //} catch (Exception e) {fail_connect++;}
                int minutes = game.time / 60;
                int remainingSeconds = game.time % 60;
                time.setText(String.format("%02d:%02d", minutes, remainingSeconds)); 
@@ -816,9 +827,9 @@ public class main_game extends Screen
                    database.gameSerializerDB(game, 2);
                } catch (Exception e) {fail_connect++;}
            } 
-           try {
-                   game = database.gameSerializerJava(game.join_nr);
-           } catch (Exception e) {fail_connect++;}
+           //try {                                                          DEBUG 11/24
+           //        game = database.gameSerializerJava(game.join_nr);
+           //} catch (Exception e) {fail_connect++;}
            int minutes = game.time / 60;
            int remainingSeconds = game.time % 60;
            time.setText(String.format("%02d:%02d", minutes, remainingSeconds)); 
@@ -874,7 +885,7 @@ public class main_game extends Screen
                        user.yy = (float) 540;
                        database.userSerializerDB(user, 2);
                        if (creator) {
-                           game = database.gameSerializerJava(game.join_nr);
+                           //game = database.gameSerializerJava(game.join_nr);                  DEBUG 11/24
                            game.phase = 0;
                            database.gameSerializerDB(game, 2);
                        }
@@ -916,6 +927,10 @@ public class main_game extends Screen
        } catch (Exception e) {fail_connect++;}
        
        Greenfoot.setSpeed(game.fps);
+       
+       long eT = System.currentTimeMillis();
+       long elapsedTime = eT - ssT;
+       System.out.println((int) elapsedTime);
    }
    
 }

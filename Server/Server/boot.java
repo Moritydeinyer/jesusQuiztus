@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class boot extends World
 {
-    databaseConnect database;
+    databaseGateway database;
     int max_connections;                
     int server_id;                      
     int autostart_players;              
@@ -17,7 +17,7 @@ public class boot extends World
         server_id = 67;                                 //DEV select a unique SERVER_ID. please request it from an administrator.
         autostart_players = 2;                          //DEV select the autostart by x players 
         current_games = new game[7];
-        database = new databaseConnect();
+        database = new databaseGateway();
     }
     
     public void act() 
@@ -206,6 +206,6 @@ public class boot extends World
                 }
             } 
             
-        } catch (SQLException e) {}
+        } catch (Exception e) {}
     }
 }

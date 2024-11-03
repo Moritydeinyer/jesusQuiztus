@@ -8,6 +8,8 @@ import java.util.List;
 public class databaseGateway  
 {
 
+    int ping;
+    
     public databaseGateway()
     {
         //unit_test
@@ -32,6 +34,7 @@ public class databaseGateway
     }
 
     public String apiCallPost(String jsonStr, String url) throws Exception {
+        long startTime = System.currentTimeMillis();
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
@@ -49,6 +52,9 @@ public class databaseGateway
             response.append(inputLine);
         }
         in.close();
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        ping = (int) elapsedTime;
         return response.toString();
     }
     
@@ -102,7 +108,7 @@ public class databaseGateway
               users[i] = userSerializerJava((Integer.parseInt(strArray[i])), "", "");
             }
         } else {users = new user[0];}
-        map map = mapSerializerJava(Integer.parseInt(jsonObject.getString("map")));                                                 //DEBUG
+        map map = mapSerializerJava(Integer.parseInt(jsonObject.getString("map")));                                              
         return new game(id, time, join_nr, users, map, round, phase, server_id, publiC);
     }
     
