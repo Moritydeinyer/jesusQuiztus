@@ -6,6 +6,11 @@ Players compete in real-time PvP rounds where answering questions correctly fuel
 
 ---
 
+> [!WARNING]
+> **Service Notice** — Online features may currently be experiencing disruptions due to ongoing infrastructure changes. We are working to resolve this as quickly as possible.
+
+---
+
 ## Features
 
 **Multiplayer**
