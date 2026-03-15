@@ -83,7 +83,7 @@ public class databaseGateway
     
     public int getNewJoinNr() throws Exception
     {
-        String jsonString = apiCallGet("https://iab-services.ddns.net/api/jesusquiztus/get_join_nr");
+        String jsonString = apiCallGet("https://api.pagerevival.de/api/jesusquiztus/get_join_nr");
         JSONObject jsonObject = new JSONObject(jsonString);
         String answer = jsonObject.getString("join_nr");
         return Integer.parseInt(answer);
@@ -91,7 +91,7 @@ public class databaseGateway
     
     public game gameSerializerJava(int joinNumber) throws Exception {
         String requestBody = "{\"join_nr\": \"" + joinNumber + "\"}";
-        String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/get_game_obj");
+        String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/get_game_obj");
         JSONObject jsonObject = new JSONObject(response);
         int id = Integer.parseInt(jsonObject.getString("id"));
         int time = Integer.parseInt(jsonObject.getString("time"));
@@ -122,17 +122,17 @@ public class databaseGateway
         if (method == 1) {
             //DELETE
             String requestBody = "{\"method\": \"delete\", \"id\": \"" + tempGame.id + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_game_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_game_obj");
         }
         if (method == 2) {
             //UPDATE
             String requestBody = "{\"method\": \"update\", \"users\": \"" + userStr + "\", \"id\": \"" + tempGame.id + "\", \"map\": \"" + tempGame.current_map + "\", \"time\": \"" + tempGame.time + "\", \"round\": \"" + tempGame.round + "\", \"phase\": \"" + tempGame.phase + "\", \"server_id\": \"" + tempGame.server_id + "\", \"public\": \"" + tempGame.pblc + "\", \"join_nr\": \"" + tempGame.join_nr + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_game_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_game_obj");
         }
         if (method == 3) {
             //INSERT
             String requestBody = "{\"method\": \"create\", \"users\": \"" + userStr + "\", \"map\": \"" + tempGame.current_map + "\", \"time\": \"" + tempGame.time + "\", \"round\": \"" + tempGame.round + "\", \"phase\": \"" + tempGame.phase + "\", \"server_id\": \"" + tempGame.server_id + "\", \"public\": \"" + tempGame.pblc + "\", \"join_nr\": \"" + tempGame.join_nr + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_game_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_game_obj");
             JSONObject jsonObject = new JSONObject(response);
             int id = Integer.parseInt(jsonObject.getString("id"));
             tempGame.id = id;
@@ -140,7 +140,7 @@ public class databaseGateway
     }
     
     public game[] gameSerializerJavaAll() throws Exception {
-        String response = apiCallGet("https://iab-services.ddns.net/api/jesusquiztus/get_all_game_obj");
+        String response = apiCallGet("https://api.pagerevival.de/api/jesusquiztus/get_all_game_obj");
         JSONObject jsonObject = new JSONObject(response);
         String data = jsonObject.getString("games");
         List<game> gameList = parseGameData(data);
@@ -173,7 +173,7 @@ public class databaseGateway
     
     public user userSerializerJava(int userID, String password, String email) throws Exception {
         String requestBody = "{\"id\": \"" + userID + "\"}";
-        String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/get_user_obj");
+        String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/get_user_obj");
         JSONObject jsonObject = new JSONObject(response);
         int id = Integer.parseInt(jsonObject.getString("id"));
         float x = Float.parseFloat(jsonObject.getString("x"));
@@ -207,17 +207,17 @@ public class databaseGateway
         if (method == 1) {
             //DELETE
             String requestBody = "{\"method\": \"delete\", \"id\": \"" + tempUser.id + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_user_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_user_obj");
         }
         if (method == 2) {
             //UPDATE
             String requestBody = "{\"method\": \"update\",\"id\": \"" + tempUser.id + "\", \"effects\": \"" + userStr + "\", \"health\": \"" + tempUser.health + "\", \"x\": \"" + tempUser.xx + "\", \"y\": \"" + tempUser.yy + "\", \"points\": \"" + tempUser.points + "\", \"speed\": \"" + tempUser.speed + "\", \"visibility\": \"" + tempUser.visibility + "\", \"damage\": \"" + tempUser.damage + "\", \"email\": \"" + tempUser.email + "\", \"password\": \"" + tempUser.password + "\", \"img\": \"" + tempUser.img + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_user_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_user_obj");
         }
         if (method == 3) {
             //INSERT
             String requestBody = "{\"method\": \"create\", \"effects\": \"" + userStr + "\", \"health\": \"" + tempUser.health + "\", \"x\": \"" + tempUser.xx + "\", \"y\": \"" + tempUser.yy + "\", \"points\": \"" + tempUser.points + "\", \"speed\": \"" + tempUser.speed + "\", \"visibility\": \"" + tempUser.visibility + "\", \"damage\": \"" + tempUser.damage + "\", \"email\": \"" + tempUser.email + "\", \"password\": \"" + tempUser.password + "\", \"img\": \"" + tempUser.img + "\"}";
-            String response = apiCallPost(requestBody, "https://iab-services.ddns.net/api/jesusquiztus/serializer_user_obj");
+            String response = apiCallPost(requestBody, "https://api.pagerevival.de/api/jesusquiztus/serializer_user_obj");
             JSONObject jsonObject = new JSONObject(response);
             int id = Integer.parseInt(jsonObject.getString("id"));
             tempUser.id = id;
@@ -225,7 +225,7 @@ public class databaseGateway
     }
     
     public user[] userSerializerJavaAll() throws Exception {
-        String response = apiCallGet("https://iab-services.ddns.net/api/jesusquiztus/get_all_user_obj");
+        String response = apiCallGet("https://api.pagerevival.de/api/jesusquiztus/get_all_user_obj");
         JSONObject jsonObject = new JSONObject(response);
         String data = jsonObject.getString("players");
         List<user> userList = parseUserData(data);
